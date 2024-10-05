@@ -33,6 +33,8 @@ export const initializePhaserGame = (parentId) => {
     this.load.image("character", "/assets/character/idle.png");
       this.load.image("ground", "/assets/Tiles/floor.png"); // 바닥 이미지 로드
       this.load.image("background", "/assets/Tiles/wall2.png"); // 배경 이미지 로드
+      this.load.image("tank_body", "assets/tank_body.png"); // 포대 몸체
+      this.load.image("tank_turret", "assets/tank_turret.png"); // 포대 대포
   }
 
   // create 함수: 게임 로직을 초기화
@@ -44,7 +46,6 @@ export const initializePhaserGame = (parentId) => {
           {
               this.add.image(50+i*100, 50+j*100, "background").setOrigin(0.5, 0.5).setDisplaySize(100, 100);  
           }
-            
       }
           
     
