@@ -7,6 +7,7 @@ export const initializePhaserGame = (parentId) => {
   let zKey;
   let ground;
   let inputField;
+  let deleteButton;
   let submitButton;
   let switchButton;
   let doorGroup;
@@ -39,7 +40,8 @@ export const initializePhaserGame = (parentId) => {
     this.load.image("character", "/assets/character/idle.png");
     this.load.image("ground", "/assets/Tiles/floor.png");
     this.load.image("background", "/assets/Tiles/wall2.png");
-    this.load.image("button", "/assets/button.png"); // 버튼 이미지 로드
+    this.load.image("delete", "/assets/delete.png");
+    this.load.image("submit", "/assets/submit.png"); // 버튼 이미지 로드
     this.load.image("switch", "/assets/switch.png"); // 스위치 이미지 로드
     this.load.image("door_top", "/assets/door_openTop.png"); // 문 위쪽 이미지
     this.load.image("door_mid", "/assets/door_openMid.png"); // 문 중간 이미지
@@ -86,21 +88,26 @@ export const initializePhaserGame = (parentId) => {
       });
     });
 
+    // 문을 플레이어보다 아래에 표시되게 설정
+    doorGroup.setDepth(-1);
+
     // 버튼과 스위치 추가 (문 옆에 정렬)
-    submitButton = this.add.image(300, 285, "button").setInteractive(); // 버튼 이미지 추가
+    deleteButton = this.add.image(230, 285, "delete").setInteractive();
+    submitButton = this.add.image(360, 285, "submit").setInteractive(); // 버튼 이미지 추가
     switchButton = this.add.image(500, 285, "switch").setInteractive(); // 스위치 이미지 추가
 
     // 텍스트 추가
     this.add.text(65, 190, "Thread", { fontSize: "18px", fill: "#fff" }); // 문 위의 텍스트
-    this.add.text(275, 240, "Submit", { fontSize: "18px", fill: "#fff" }); // 버튼 위의 텍스트
+    this.add.text(201 , 240, "Delete", { fontSize: "18px", fill: "#fff" }); // 버튼 위의 텍스트
+    this.add.text(337, 240, "Submit", { fontSize: "18px", fill: "#fff" }); // Submit 위의 텍스트
     this.add.text(475, 230, "Typing", { fontSize: "18px", fill: "#fff" }); // 스위치 위의 텍스트
 
     // HTML 입력 창을 Phaser 위에 추가
     inputField = this.add.dom(this.cameras.main.width / 2, 50).createFromHTML(`
-      <input type="text" id="player-input" name="player-input" placeholder="Enter your name..." 
-             style="font-size: 24px; width: 200px; padding: 10px;" readonly/>
+      <textarea type="text" id="player-input" name="player-input" placeholder="글을 입력하세요" 
+             style="font-size: 24px; width: 200px; padding: 10px;" readonly></textarea>
     `);
-    inputField.setOrigin(0.5);
+    // inputField.setOrigin(0.5);
     inputField.setDepth(10); // 다른 요소들 위에 표시되도록 설정
 
     // 버튼 클릭 이벤트

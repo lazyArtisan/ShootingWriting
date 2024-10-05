@@ -55,58 +55,8 @@
 
 <body>
 
-    <div class="login-container" id="loginForm">
-        <input id="username" type="text" placeholder="Username">
-        <input id="password" type="password" placeholder="Password">
-        <button id="loginButton">Login</button>
-    </div>
-
-    <script>
-        const loginButton = document.getElementById('loginButton');
-        const usernameInput = document.getElementById('username');
-        const passwordInput = document.getElementById('password');
-
-        // 각 요소에 클릭 이벤트를 추가하여 클릭 시 부서지는 연출을 적용
-        loginButton.addEventListener('click', () => {
-            createPieces(loginButton);
-        });
-
-        usernameInput.addEventListener('click', () => {
-            createPieces(usernameInput);
-        });
-
-        passwordInput.addEventListener('click', () => {
-            createPieces(passwordInput);
-        });
-
-        function createPieces(element) {
-            const rect = element.getBoundingClientRect(); // 요소의 위치 정보
-            const pieceCount = 50; // 조각 수
-            element.style.visibility = 'hidden'; // 클릭한 요소를 숨김
-
-            for (let i = 0; i < pieceCount; i++) {
-                const piece = document.createElement('div');
-                piece.innerText = "■"; // 조각 모양 (네모)
-                piece.classList.add('piece');
-                document.body.appendChild(piece);
-
-                // 조각의 초기 위치를 폼의 위치 위에 설정
-                piece.style.left = `${rect.left + Math.random() * rect.width}px`;
-                piece.style.top = `${rect.top + Math.random() * rect.height}px`;
-
-                // GSAP 애니메이션 적용: 조각들이 랜덤하게 흩어짐
-                gsap.to(piece, {
-                    x: Math.random() * 500 - 250,
-                    y: Math.random() * 500 - 250,
-                    rotation: Math.random() * 720,
-                    opacity: 0,
-                    duration: 2,
-                    ease: 'power3.out',
-                    onComplete: () => piece.remove() // 애니메이션이 끝나면 조각 제거
-                });
-            }
-        }
-    </script>
+    <textarea type="text" id="player-input" name="player-input" placeholder="글을 입력하세요"
+        style="font-size: 24px; width: 200px; padding: 10px;" readonly />
 
 </body>
 
