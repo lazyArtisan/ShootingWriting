@@ -3,7 +3,7 @@ import { gsap } from "gsap";
 import { initializePhaserGame } from "./component/PhaserGame"; // Phaser 초기화 함수 불러오기
 import { createPieces } from "./component/animationUtils"; // 애니메이션 함수 불러오기
 import { createLetter } from "./component/letterUtils"; // 랜덤 알파벳 함수 불러오기
-import { rotateTurretToMouse } from "./component/rotateTurretToMouse"; // 터렛 회전 함수 불러오기
+import { createTurret } from "./component/createTurret"; // 모듈화된 Turret 생성 함수 불러오기
 import "./App.css"; // CSS 파일 불러오기
 
 function App() {
@@ -20,6 +20,7 @@ function App() {
   const [isLoginClicked, setIsLoginClicked] = useState(false);
   const [isCanvasVisible, setIsCanvasVisible] = useState(false); // 캔버스가 표시되는 상태
   const [isTurretCreated, setIsTurretCreated] = useState(false); // Turret 이미지가 생성되었는지 여부
+  const [phaserInitialized, setPhaserInitialized] = useState(false); // Phaser가 초기화되었는지 여부
 
   // 각각의 요소에 클릭 이벤트를 추가
   const handleUsernameClick = () => {
@@ -37,27 +38,6 @@ function App() {
     setIsLoginClicked(true); // 상태 업데이트
   };
 
-  // 우측 상단에 Turret 이미지 생성
-  const createTurret = () => {
-    if (!isTurretCreated && canvasRef.current) {
-      const canvasRect = canvasRef.current.getBoundingClientRect();
-      console.log("Canvas bounds:", canvasRect); // 캔버스 위치 출력
-
-      const turret = document.createElement("img");
-      turret.src = "/assets/tank_turret.png"; // 이미지 경로 확인
-      turret.className = "turret"; // CSS 클래스 적용
-      turret.style.top = `${canvasRect.top - 100}px`; 
-      turret.style.left = `${canvasRect.right - 150}px`;
-      document.body.appendChild(turret);
-
-      turretRef.current = turret;
-      rotateTurretToMouse(turretRef);
-
-      setIsTurretCreated(true);
-    } else {
-      console.log("Turret already created or canvas not found");
-    }
-  };
 
   // 세 개의 클릭 이벤트가 모두 발생했는지 확인하는 함수
   const checkAllClicked = () => {
@@ -87,12 +67,14 @@ function App() {
 
   // 캔버스가 표시되면 Phaser 게임을 초기화 및 Turret 생성
   useEffect(() => {
-    if (isCanvasVisible && canvasRef.current) {
+    if (isCanvasVisible && canvasRef.current && !phaserInitialized) {
       console.log("Canvas now visible:", canvasRef.current);
       initializePhaserGame("phaser-container");
-      createTurret(); // 캔버스가 표시된 후에 Turret 생성
+      createTurret(canvasRef, turretRef, isTurretCreated, setIsTurretCreated);
+      setPhaserInitialized(true); // Phaser가 한 번만 초기화되도록 설정
     }
-  }, [isCanvasVisible]); // isCanvasVisible이 변경되면 실행
+  }, [isCanvasVisible, canvasRef, turretRef, isTurretCreated, phaserInitialized]); // 필요한 변수들을 의존성 배열에 추가
+
 
   // 클릭 상태가 변경될 때마다 확인
   useEffect(() => {
