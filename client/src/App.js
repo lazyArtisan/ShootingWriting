@@ -1,38 +1,9 @@
 import React, { useRef, useState, useEffect } from "react";
 import { gsap } from "gsap";
-import { initializePhaserGame } from "./PhaserGame"; // Phaser 게임 초기화 함수를 불러옴
+import { initializePhaserGame } from "./component/PhaserGame"; // Phaser 초기화 함수 불러오기
+import { createPieces } from "./component/animationUtils"; // 애니메이션 함수 불러오기
+import { createLetter } from "./component/letterUtils"; // 랜덤 알파벳 함수 불러오기
 import "./App.css";
-
-// 랜덤 알파벳 생성 함수
-const getRandomLetter = () => {
-  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-  return letters[Math.floor(Math.random() * letters.length)];
-};
-
-// 랜덤 알파벳을 생성하고 화면에서 좌측으로 이동시키는 함수
-const createLetter = () => {
-  const letter = document.createElement("div");
-  letter.innerText = getRandomLetter();
-  letter.classList.add("moving-letter"); // 스타일을 적용할 클래스
-
-  // 초기 위치 설정 (화면 오른쪽에서 나타남)
-  letter.style.position = "absolute";
-  letter.style.top = `${Math.random() * (window.innerHeight - 50)}px`; // 화면 내에서 생성
-  letter.style.left = `${window.innerWidth}px`; // 정확히 화면 오른쪽 끝에 위치
-
-  // 문서를 추가하고 애니메이션
-  document.body.appendChild(letter);
-
-  // GSAP 애니메이션: 글자를 왼쪽으로 이동
-  gsap.to(letter, {
-    x: -window.innerWidth - 100, // 화면 왼쪽 바깥으로 이동
-    duration: Math.random() * 5 + 3, // 랜덤 속도
-    ease: "linear",
-    onComplete: () => {
-      letter.remove(); // 화면을 벗어나면 제거
-    },
-  });
-};
 
 function App() {
   const usernameRef = useRef(null);
@@ -45,35 +16,6 @@ function App() {
   const [isPasswordClicked, setIsPasswordClicked] = useState(false);
   const [isLoginClicked, setIsLoginClicked] = useState(false);
   const [isCanvasVisible, setIsCanvasVisible] = useState(false); // 캔버스가 표시되는 상태
-
-  // 클릭 시 부서지는 애니메이션을 위한 함수
-  const createPieces = (element) => {
-    const rect = element.getBoundingClientRect(); // 요소 위치 정보
-    const pieceCount = 50; // 조각 수
-    element.style.visibility = "hidden"; // 요소 숨김
-
-    for (let i = 0; i < pieceCount; i++) {
-      const piece = document.createElement("div");
-      piece.innerText = "■"; // 조각 모양
-      piece.classList.add("piece");
-      document.body.appendChild(piece);
-
-      // 조각의 초기 위치를 요소 위에 설정
-      piece.style.left = `${rect.left + Math.random() * rect.width}px`;
-      piece.style.top = `${rect.top + Math.random() * rect.height}px`;
-
-      // GSAP 애니메이션 적용: 조각들이 랜덤하게 흩어짐
-      gsap.to(piece, {
-        x: Math.random() * 500 - 250,
-        y: Math.random() * 500 - 250,
-        rotation: Math.random() * 720,
-        opacity: 0,
-        duration: 2,
-        ease: "power3.out",
-        onComplete: () => piece.remove(), // 애니메이션 후 조각 제거
-      });
-    }
-  };
 
   // 각각의 요소에 클릭 이벤트를 추가
   const handleUsernameClick = () => {
