@@ -64,7 +64,7 @@ export const initializePhaserGame = (parentId) => {
     // HTML 입력 창을 Phaser 위에 추가
     inputField = this.add.dom(this.cameras.main.width / 2, 50).createFromHTML(`
       <input type="text" id="player-input" name="player-input" placeholder="Enter your name..." 
-             style="font-size: 24px; width: 200px; padding: 10px;"/>
+             style="font-size: 24px; width: 200px; padding: 10px;" readonly/>
     `);
     inputField.setOrigin(0.5);
     inputField.setDepth(10); // 다른 요소들 위에 표시되도록 설정
