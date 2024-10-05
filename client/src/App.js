@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { gsap } from "gsap";
+import { initializePhaserGame } from "./PhaserGame"; // Phaser 게임 초기화 함수를 불러옴
 import "./App.css";
 
 function App() {
@@ -77,6 +78,13 @@ function App() {
     }
   };
 
+  // 캔버스가 표시되면 Phaser 게임을 초기화
+  useEffect(() => {
+    if (isCanvasVisible) {
+      initializePhaserGame("phaser-container");
+    }
+  }, [isCanvasVisible]);
+
   // 클릭 상태가 변경될 때마다 확인
   useEffect(() => {
     checkAllClicked();
@@ -103,7 +111,7 @@ function App() {
           </button>
         </>
       ) : (
-        <canvas id="myCanvas" width="600" height="400" style={{ background: "#f0f0f0" }}></canvas>
+        <div id="phaser-container" style={{ width: "600px", height: "400px" }}></div>
       )}
     </div>
   );
