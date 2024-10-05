@@ -12,6 +12,7 @@ function App() {
   const [isUsernameClicked, setIsUsernameClicked] = useState(false);
   const [isPasswordClicked, setIsPasswordClicked] = useState(false);
   const [isLoginClicked, setIsLoginClicked] = useState(false);
+  const [isCanvasVisible, setIsCanvasVisible] = useState(false); // 캔버스가 표시되는 상태
 
   // 클릭 시 부서지는 애니메이션을 위한 함수
   const createPieces = (element) => {
@@ -68,6 +69,9 @@ function App() {
           height: "400px",
           duration: 2,
           ease: "power2.inOut",
+          onComplete: () => {
+            setIsCanvasVisible(true); // 크기 변화 후 캔버스 표시 상태로 변경
+          },
         });
       }, 2000); // 2초 지연 후 실행
     }
@@ -80,21 +84,27 @@ function App() {
 
   return (
     <div ref={containerRef} className="login-container">
-      <input
-        ref={usernameRef}
-        type="text"
-        placeholder="Username"
-        onClick={handleUsernameClick}
-      />
-      <input
-        ref={passwordRef}
-        type="password"
-        placeholder="Password"
-        onClick={handlePasswordClick}
-      />
-      <button ref={loginButtonRef} onClick={handleLoginClick}>
-        Login
-      </button>
+      {!isCanvasVisible ? (
+        <>
+          <input
+            ref={usernameRef}
+            type="text"
+            placeholder="Username"
+            onClick={handleUsernameClick}
+          />
+          <input
+            ref={passwordRef}
+            type="password"
+            placeholder="Password"
+            onClick={handlePasswordClick}
+          />
+          <button ref={loginButtonRef} onClick={handleLoginClick}>
+            Login
+          </button>
+        </>
+      ) : (
+        <canvas id="myCanvas" width="600" height="400" style={{ background: "#f0f0f0" }}></canvas>
+      )}
     </div>
   );
 }
