@@ -7,6 +7,9 @@ export const initializePhaserGame = (parentId) => {
   let zKey;
   let ground;
   let inputField;
+  let submitButton;
+  let switchButton;
+  let doorGroup;
 
   const config = {
     type: Phaser.AUTO,
@@ -36,13 +39,17 @@ export const initializePhaserGame = (parentId) => {
     this.load.image("character", "/assets/character/idle.png");
     this.load.image("ground", "/assets/Tiles/floor.png");
     this.load.image("background", "/assets/Tiles/wall2.png");
+    this.load.image("button", "/assets/button.png"); // 버튼 이미지 로드
+    this.load.image("switch", "/assets/switch.png"); // 스위치 이미지 로드
+    this.load.image("door_top", "/assets/door_openTop.png"); // 문 위쪽 이미지
+    this.load.image("door_mid", "/assets/door_openMid.png"); // 문 중간 이미지
   }
 
   function create() {
     // 배경 이미지 추가
     for (let i = 0; i < 7; i++) {
       for (let j = 0; j < 7; j++) {
-        this.add.image(50 + i * 100, 50 + j * 100, "background").setOrigin(0.5, 0.5).setDisplaySize(100, 100);
+        this.add.image(50 + i * 100, 50 + j * 100, "background").setOrigin(0.5, 0.5).setDisplaySize(100, 100).setDepth(-10);
       }
     }
 
@@ -61,6 +68,33 @@ export const initializePhaserGame = (parentId) => {
     cursors = this.input.keyboard.createCursorKeys();
     zKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
 
+    // 문을 그룹으로 묶음
+    doorGroup = this.add.group();
+
+    // 문 이미지 추가
+    const doorTop = this.add.image(100, 225, "door_top").setInteractive();
+    const doorMid = this.add.image(100, 285, "door_mid").setInteractive();
+
+    // 그룹에 문을 추가
+    doorGroup.add(doorTop);
+    doorGroup.add(doorMid);
+
+    // 클릭 이벤트를 그룹의 모든 문에 추가
+    doorGroup.getChildren().forEach((doorPart) => {
+      doorPart.on("pointerdown", () => {
+        console.log("Door part clicked:", doorPart.texture.key);
+      });
+    });
+
+    // 버튼과 스위치 추가 (문 옆에 정렬)
+    submitButton = this.add.image(300, 285, "button").setInteractive(); // 버튼 이미지 추가
+    switchButton = this.add.image(500, 285, "switch").setInteractive(); // 스위치 이미지 추가
+
+    // 텍스트 추가
+    this.add.text(65, 190, "Thread", { fontSize: "18px", fill: "#fff" }); // 문 위의 텍스트
+    this.add.text(275, 240, "Submit", { fontSize: "18px", fill: "#fff" }); // 버튼 위의 텍스트
+    this.add.text(475, 230, "Typing", { fontSize: "18px", fill: "#fff" }); // 스위치 위의 텍스트
+
     // HTML 입력 창을 Phaser 위에 추가
     inputField = this.add.dom(this.cameras.main.width / 2, 50).createFromHTML(`
       <input type="text" id="player-input" name="player-input" placeholder="Enter your name..." 
@@ -69,10 +103,14 @@ export const initializePhaserGame = (parentId) => {
     inputField.setOrigin(0.5);
     inputField.setDepth(10); // 다른 요소들 위에 표시되도록 설정
 
-    // 입력 이벤트 리스너 추가
-    inputField.addListener('input').on('input', function (event) {
-      const inputValue = event.target.value;
-      console.log("Current input value:", inputValue);
+    // 버튼 클릭 이벤트
+    submitButton.on("pointerdown", () => {
+      console.log("Submit button clicked!");
+    });
+
+    // 스위치 클릭 이벤트
+    switchButton.on("pointerdown", () => {
+      console.log("Switch button clicked!");
     });
   }
 
