@@ -52,13 +52,16 @@ export const fireBullet = (turretRef) => {
 
         // 총알을 DOM에 추가
         document.body.appendChild(bullet);
+          
+        const inputElement = document.getElementById('player-input');
 
         // 충돌 감지 함수 (moving-letter 클래스와 충돌하면 제거)
         const moveBulletAndCheckCollision = () => {
           const letters = document.querySelectorAll(".moving-letter");
 
           letters.forEach((letter) => {
-            if (detectCollision(bullet, letter)) {
+              if (detectCollision(bullet, letter)) {
+              inputElement.value = inputElement.value + letter.innerText;
               bullet.remove(); // 충돌 시 총알 제거
               letter.remove(); // 충돌 시 글자 제거
             }
