@@ -51,3 +51,10 @@ button {
   white-space: nowrap;
   pointer-events: none; /* 마우스 이벤트 차단 */
 }
+
+/* Turret 이미지 스타일 */
+.turret {
+  position: absolute;
+  width: 100px;
+  height: auto; /* 비율 유지 */
+}
