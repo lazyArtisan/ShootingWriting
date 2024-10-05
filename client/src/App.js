@@ -4,6 +4,7 @@ import { initializePhaserGame } from "./component/PhaserGame"; // Phaser 초기�
 import { createPieces } from "./component/animationUtils"; // 애니메이션 함수 불러오기
 import { createLetter } from "./component/letterUtils"; // 랜덤 알파벳 함수 불러오기
 import { createTurret } from "./component/createTurret"; // 모듈화된 Turret 생성 함수 불러오기
+import { fireBullet } from "./component/bulletUtils";
 import "./App.css"; // CSS 파일 불러오기
 
 function App() {
@@ -57,7 +58,7 @@ function App() {
           ease: "power2.inOut",
           onComplete: () => {
             setIsCanvasVisible(true); // 크기 변화 후 캔버스 표시 상태로 변경
-            setInterval(createLetter, 100); // 0.1초마다 새로운 글자를 생성
+            // setInterval(createLetter, 100); // 0.1초마다 새로운 글자를 생성
           },
         });
       }, 2000); // 2초 지연 후 실행
@@ -80,23 +81,24 @@ function App() {
   }, [isCanvasVisible, canvasRef, turretRef, isTurretCreated, phaserInitialized]); // 필요한 변수들을 의존성 배열에 추가
 
   // 클릭 시마다 총알 발사
-  const fireBullet = () => {
-    console.log("pretend fired");
+  const handleFireBullet = () => {
+    // console.log("pretend fired");
+    fireBullet(turretRef);
   };
 
   // 캔버스가 표시됐고 스위치가 활성화됐다면 window에 클릭 이벤트 리스너 추가
   // 스위치가 비활성화된다면 이벤트 리스너 제거
   useEffect(() => {
-    if (isCanvasVisible && canvasRef.current)
+    if (isCanvasVisible && canvasRef.current && turretRef.current)
     {
-      window.addEventListener('click', fireBullet);
+      window.addEventListener('click', handleFireBullet);
     }
 
     // 컴포넌트가 언마운트될 때 이벤트 리스너 제거
     return () => {
-      window.removeEventListener('click', fireBullet);
+      window.removeEventListener('click', handleFireBullet);
     };
-  }, [isCanvasVisible, canvasRef]);
+  }, [isCanvasVisible, canvasRef, turretRef]);
 
   return (
     <div ref={containerRef} className="login-container">
