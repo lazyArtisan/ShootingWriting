@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import { threadButtonPressed, deleteButtonPressed, submitButtonPressed, switchButtonPressed } from "./buttonUtils";
 
 // Phaser 게임 초기화 함수
 export const initializePhaserGame = (parentId) => {
@@ -137,24 +138,27 @@ export const initializePhaserGame = (parentId) => {
 
     // C 키가 눌렸고, 플레이어가 해당 객체와 충돌 중일 때 콘솔 로그 출력
     if (Phaser.Input.Keyboard.JustDown(cKey)) {
+      if (playerTouchingDoor) {
+        threadButtonPressed(doorGroup);
+      }
       if (playerTouchingDeleteButton) {
-        console.log("Delete button activated while pressing C!");
+        const textarea = inputField.node.querySelector('textarea');
+        textarea.value = ''; // 값 초기화
+        // deleteButtonPressed(deleteButton, inputField);
+        console.log("deleteButton");
       }
       if (playerTouchingSubmitButton) {
-        console.log("Submit button activated while pressing C!");
+        submitButtonPressed(submitButton);
       }
       if (playerTouchingSwitchButton) {
-        console.log("Switch button activated while pressing C!");
-      }
-      if (playerTouchingDoor) {
-        console.log("Door activated while pressing C!");
+        switchButtonPressed(switchButton);
       }
     }
 
     // 충돌 상태 초기화 (플레이어가 떨어졌을 때 상태 초기화)
+    playerTouchingDoor = this.physics.overlap(player, doorGroup);
     playerTouchingDeleteButton = this.physics.overlap(player, deleteButton);
     playerTouchingSubmitButton = this.physics.overlap(player, submitButton);
     playerTouchingSwitchButton = this.physics.overlap(player, switchButton);
-    playerTouchingDoor = this.physics.overlap(player, doorGroup);
   }
 };

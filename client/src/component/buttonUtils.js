@@ -1,13 +1,17 @@
 
-export const threadButton = (doorGroup) => {
-
+export const threadButtonPressed = (doorGroup) => {
+    console.log("threadButton");
 }
 
-export const deleteButton = (deleteButton) => {
+export const deleteButtonPressed = (deleteButton, inputField) => {
+    console.log("deleteButton");
+    inputField.node.value = "";
 }
 
-export const submitButton = (submitButton) => {
+export const submitButtonPressed = (submitButton) => {
+    console.log("submitButton");
 }
 
-export const switchButton = (switchButton) => {
+export const switchButtonPressed = (switchButton) => {
+    console.log("switchButton");
 }
