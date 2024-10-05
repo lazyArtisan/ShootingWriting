@@ -5,12 +5,17 @@ export const initializePhaserGame = (parentId) => {
   let player;
   let cursors;
   let zKey;
+  let cKey;
   let ground;
   let inputField;
   let deleteButton;
   let submitButton;
   let switchButton;
   let doorGroup;
+  let playerTouchingDoor = false;
+  let playerTouchingDeleteButton = false;
+  let playerTouchingSubmitButton = false;
+  let playerTouchingSwitchButton = false;
 
   const config = {
     type: Phaser.AUTO,
@@ -69,55 +74,51 @@ export const initializePhaserGame = (parentId) => {
     // 키보드 입력 감지
     cursors = this.input.keyboard.createCursorKeys();
     zKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.Z);
+    cKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C); // C 키 추가
 
     // 문을 그룹으로 묶음
-    doorGroup = this.add.group();
+    doorGroup = this.physics.add.staticGroup();
 
     // 문 이미지 추가
-    const doorTop = this.add.image(100, 225, "door_top").setInteractive();
-    const doorMid = this.add.image(100, 285, "door_mid").setInteractive();
-
-    // 그룹에 문을 추가
-    doorGroup.add(doorTop);
-    doorGroup.add(doorMid);
-
-    // 클릭 이벤트를 그룹의 모든 문에 추가
-    doorGroup.getChildren().forEach((doorPart) => {
-      doorPart.on("pointerdown", () => {
-        console.log("Door part clicked:", doorPart.texture.key);
-      });
-    });
+    const doorTop = doorGroup.create(100, 225, "door_top").setInteractive();
+    const doorMid = doorGroup.create(100, 285, "door_mid").setInteractive();
 
     // 문을 플레이어보다 아래에 표시되게 설정
     doorGroup.setDepth(-1);
 
-    // 버튼과 스위치 추가 (문 옆에 정렬)
-    deleteButton = this.add.image(230, 285, "delete").setInteractive();
-    submitButton = this.add.image(360, 285, "submit").setInteractive(); // 버튼 이미지 추가
-    switchButton = this.add.image(500, 285, "switch").setInteractive(); // 스위치 이미지 추가
+    // 버튼과 스위치 추가 (물리 엔진 적용)
+    deleteButton = this.physics.add.staticImage(230, 285, "delete").setInteractive();
+    submitButton = this.physics.add.staticImage(360, 285, "submit").setInteractive();
+    switchButton = this.physics.add.staticImage(500, 285, "switch").setInteractive();
 
     // 텍스트 추가
-    this.add.text(65, 190, "Thread", { fontSize: "18px", fill: "#fff" }); // 문 위의 텍스트
-    this.add.text(201 , 240, "Delete", { fontSize: "18px", fill: "#fff" }); // 버튼 위의 텍스트
-    this.add.text(337, 240, "Submit", { fontSize: "18px", fill: "#fff" }); // Submit 위의 텍스트
-    this.add.text(475, 230, "Typing", { fontSize: "18px", fill: "#fff" }); // 스위치 위의 텍스트
+    this.add.text(65, 190, "Thread", { fontSize: "18px", fill: "#fff" });
+    this.add.text(201, 240, "Delete", { fontSize: "18px", fill: "#fff" });
+    this.add.text(337, 240, "Submit", { fontSize: "18px", fill: "#fff" });
+    this.add.text(475, 230, "Typing", { fontSize: "18px", fill: "#fff" });
 
     // HTML 입력 창을 Phaser 위에 추가
     inputField = this.add.dom(this.cameras.main.width / 2, 100).createFromHTML(`
       <textarea type="text" id="player-input" name="player-input" placeholder="글을 입력하세요" 
              style="font-size: 24px; width: 300px; height: 100px; padding: 10px;" readonly></textarea>
     `);
-    // inputField.setOrigin(0.5);
-    inputField.setDepth(10); // 다른 요소들 위에 표시되도록 설정
+    inputField.setDepth(10);
 
-    // 버튼 클릭 이벤트
-    submitButton.on("pointerdown", () => {
-      console.log("Submit button clicked!");
+    // 충돌 감지 추가 및 상태 기록
+    this.physics.add.overlap(player, doorGroup, () => {
+      playerTouchingDoor = true;
     });
 
-    // 스위치 클릭 이벤트
-    switchButton.on("pointerdown", () => {
-      console.log("Switch button clicked!");
+    this.physics.add.overlap(player, deleteButton, () => {
+      playerTouchingDeleteButton = true;
+    });
+
+    this.physics.add.overlap(player, submitButton, () => {
+      playerTouchingSubmitButton = true;
+    });
+
+    this.physics.add.overlap(player, switchButton, () => {
+      playerTouchingSwitchButton = true;
     });
   }
 
@@ -133,5 +134,27 @@ export const initializePhaserGame = (parentId) => {
     if (Phaser.Input.Keyboard.JustDown(zKey) && player.body.touching.down) {
       player.setVelocityY(-400); // 점프
     }
+
+    // C 키가 눌렸고, 플레이어가 해당 객체와 충돌 중일 때 콘솔 로그 출력
+    if (Phaser.Input.Keyboard.JustDown(cKey)) {
+      if (playerTouchingDeleteButton) {
+        console.log("Delete button activated while pressing C!");
+      }
+      if (playerTouchingSubmitButton) {
+        console.log("Submit button activated while pressing C!");
+      }
+      if (playerTouchingSwitchButton) {
+        console.log("Switch button activated while pressing C!");
+      }
+      if (playerTouchingDoor) {
+        console.log("Door activated while pressing C!");
+      }
+    }
+
+    // 충돌 상태 초기화 (플레이어가 떨어졌을 때 상태 초기화)
+    playerTouchingDeleteButton = this.physics.overlap(player, deleteButton);
+    playerTouchingSubmitButton = this.physics.overlap(player, submitButton);
+    playerTouchingSwitchButton = this.physics.overlap(player, switchButton);
+    playerTouchingDoor = this.physics.overlap(player, doorGroup);
   }
 };
