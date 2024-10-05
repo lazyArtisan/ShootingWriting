@@ -58,7 +58,7 @@ function App() {
           ease: "power2.inOut",
           onComplete: () => {
             setIsCanvasVisible(true); // 크기 변화 후 캔버스 표시 상태로 변경
-            // setInterval(createLetter, 100); // 0.1초마다 새로운 글자를 생성
+            setInterval(createLetter, 100); // 0.1초마다 새로운 글자를 생성
           },
         });
       }, 2000); // 2초 지연 후 실행
