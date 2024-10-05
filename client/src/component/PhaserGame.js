@@ -103,9 +103,9 @@ export const initializePhaserGame = (parentId) => {
     this.add.text(475, 230, "Typing", { fontSize: "18px", fill: "#fff" }); // 스위치 위의 텍스트
 
     // HTML 입력 창을 Phaser 위에 추가
-    inputField = this.add.dom(this.cameras.main.width / 2, 50).createFromHTML(`
+    inputField = this.add.dom(this.cameras.main.width / 2, 100).createFromHTML(`
       <textarea type="text" id="player-input" name="player-input" placeholder="글을 입력하세요" 
-             style="font-size: 24px; width: 200px; padding: 10px;" readonly></textarea>
+             style="font-size: 24px; width: 300px; height: 100px; padding: 10px;" readonly></textarea>
     `);
     // inputField.setOrigin(0.5);
     inputField.setDepth(10); // 다른 요소들 위에 표시되도록 설정
