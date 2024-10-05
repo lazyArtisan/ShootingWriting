@@ -38,7 +38,6 @@ function App() {
     setIsLoginClicked(true); // 상태 업데이트
   };
 
-
   // 세 개의 클릭 이벤트가 모두 발생했는지 확인하는 함수
   const checkAllClicked = () => {
     if (isUsernameClicked && isPasswordClicked && isLoginClicked) {
@@ -65,6 +64,11 @@ function App() {
     }
   };
 
+  // 클릭 상태가 변경될 때마다 확인
+  useEffect(() => {
+    checkAllClicked();
+  }, [isUsernameClicked, isPasswordClicked, isLoginClicked]);
+
   // 캔버스가 표시되면 Phaser 게임을 초기화 및 Turret 생성
   useEffect(() => {
     if (isCanvasVisible && canvasRef.current && !phaserInitialized) {
@@ -75,11 +79,24 @@ function App() {
     }
   }, [isCanvasVisible, canvasRef, turretRef, isTurretCreated, phaserInitialized]); // 필요한 변수들을 의존성 배열에 추가
 
+  // 클릭 시마다 총알 발사
+  const fireBullet = () => {
+    console.log("pretend fired");
+  };
 
-  // 클릭 상태가 변경될 때마다 확인
+  // 캔버스가 표시됐고 스위치가 활성화됐다면 window에 클릭 이벤트 리스너 추가
+  // 스위치가 비활성화된다면 이벤트 리스너 제거
   useEffect(() => {
-    checkAllClicked();
-  }, [isUsernameClicked, isPasswordClicked, isLoginClicked]);
+    if (isCanvasVisible && canvasRef.current)
+    {
+      window.addEventListener('click', fireBullet);
+    }
+
+    // 컴포넌트가 언마운트될 때 이벤트 리스너 제거
+    return () => {
+      window.removeEventListener('click', fireBullet);
+    };
+  }, [isCanvasVisible, canvasRef]);
 
   return (
     <div ref={containerRef} className="login-container">
