@@ -40,8 +40,8 @@ export const fireBullet = (turretRef) => {
         const bullet = document.createElement("div");
         bullet.className = "bullet"; // 총알에 사용할 스타일 클래스
         bullet.style.position = "absolute";
-        bullet.style.width = "10px"; // 총알 크기
-        bullet.style.height = "10px";
+        bullet.style.width = "20px"; // 총알 크기
+        bullet.style.height = "20px";
         bullet.style.backgroundColor = "red"; // 총알 색상
         bullet.style.borderRadius = "50%"; // 총알을 원형으로
         bullet.style.left = `${turretCenterX - 5}px`; // 터렛의 중심에서 발사

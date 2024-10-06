@@ -55,9 +55,20 @@ button {
 /* Turret 이미지 스타일 */
 .turret {
   position: absolute;
-  width: 100px;
+  width: 130px;
+  height: auto; /* 비율 유지 */
+  z-index: 10;
+}
+
+.turret_body {
+  position: absolute;
+  width: 180px;
   height: auto; /* 비율 유지 */
 }
+
+/* .phaser-container {
+  z-index: 100;
+} */
 
 /* 팝업 스타일 */
 .popup-overlay {
