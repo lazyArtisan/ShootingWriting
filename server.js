@@ -11,7 +11,6 @@ mongoose.connect(mongoURI)
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log(err));
 
-
 // 게시글 스키마 및 모델 정의
 const postSchema = new mongoose.Schema({
   title: String,
@@ -23,6 +22,16 @@ const Post = mongoose.model('Post', postSchema);
 // CORS 미들웨어 사용
 app.use(cors());
 app.use(express.json()); // JSON 데이터 처리
+
+// 모든 게시글 삭제 (GET 요청)
+app.get('/api/clear-all-posts', async (req, res) => {
+  try {
+    await Post.deleteMany({}); // 모든 게시글 삭제
+    res.status(200).json({ message: 'All posts deleted' });
+  } catch (err) {
+    res.status(500).json({ error: 'Error deleting posts' });
+  }
+});
 
 // 게시글 목록 가져오기 (GET)
 app.get('/api/posts', async (req, res) => {
