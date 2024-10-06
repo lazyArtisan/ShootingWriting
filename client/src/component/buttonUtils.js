@@ -4,7 +4,7 @@ export const threadButtonPressed = (doorGroup) => {
     console.log("threadButton");
 }
 
-export const deleteButtonPressed = (deleteButton, inputField) => {
+export const deleteButtonPressed = (deleteButton) => {
     console.log("deleteButton");
 }
 
