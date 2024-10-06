@@ -142,6 +142,7 @@ button {
 .post-content {
   font-size: 15px;
   color: #14171a; /* 트위터의 글자 색상 */
+  word-wrap: break-word; /* 단어가 너무 길면 줄 바꿈 처리 */
 }
 
 /* 하단 닫기 버튼 스타일 */
