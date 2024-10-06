@@ -81,6 +81,7 @@ button {
   padding: 20px;
   border-radius: 10px;
   text-align: center;
+  overflow-y: auto; /* 세로 스크롤 추가 */
 }
 
 .popup button {
