@@ -48,7 +48,9 @@ export const initializePhaserGame = (parentId, onShowPopup) => {
     this.load.image("ground", "/assets/Tiles/floor.png");
     this.load.image("background", "/assets/Tiles/wall2.png");
     this.load.image("delete", "/assets/delete.png");
-    this.load.image("submit", "/assets/submit.png"); // 버튼 이미지 로드
+    this.load.image("delete_pressed", "/assets/delete_pressed.png");
+    this.load.image("submit", "/assets/submit.png"); // 기본 제출 버튼
+    this.load.image("submit_pressed", "/assets/submit_pressed.png"); // 눌림 상태 이미지
     this.load.image("switch", "/assets/switch.png"); // 스위치 이미지 로드
     this.load.image("door_top", "/assets/door_openTop.png"); // 문 위쪽 이미지
     this.load.image("door_mid", "/assets/door_openMid.png"); // 문 중간 이미지
@@ -137,19 +139,22 @@ export const initializePhaserGame = (parentId, onShowPopup) => {
       player.setVelocityY(-400); // 점프
     }
 
-    // C 키가 눌렸고, 플레이어가 해당 객체와 충돌 중일 때 콘솔 로그 출력
+    // C 키가 눌렸고, 플레이어가 해당 객체와 충돌 중일 때 버튼 이미지 변경
     if (Phaser.Input.Keyboard.JustDown(cKey)) {
       if (playerTouchingDoor) {
         threadButtonPressed(doorGroup);
         onShowPopup();
       }
       if (playerTouchingDeleteButton) {
+        deleteButton.setTexture('delete_pressed'); // 눌림 이미지로 변경
+        setTimeout(() => deleteButton.setTexture('delete'), 200); // 200ms 후 원래 이미지로 복구
         const textarea = inputField.node.querySelector('textarea');
         textarea.value = textarea.value.slice(0, -1); // 마지막 글자만 제거
-        // deleteButtonPressed(deleteButton, inputField);
         console.log("deleteButton");
       }
       if (playerTouchingSubmitButton) {
+        submitButton.setTexture('submit_pressed'); // 눌림 이미지로 변경
+        setTimeout(() => submitButton.setTexture('submit'), 200); // 200ms 후 원래 이미지로 복구
         submitButtonPressed(submitButton);
       }
       if (playerTouchingSwitchButton) {
