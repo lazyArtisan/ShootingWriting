@@ -15,7 +15,6 @@ function App() {
   const canvasRef = useRef(null); // 캔버스 요소를 참조하기 위한 ref
   const turretRef = useRef(null); // 터렛 이미지 참조를 위한 ref
 
-  // 각각의 클릭 여부를 추적하는 상태
   const [isUsernameClicked, setIsUsernameClicked] = useState(false);
   const [isPasswordClicked, setIsPasswordClicked] = useState(false);
   const [isLoginClicked, setIsLoginClicked] = useState(false);
@@ -23,6 +22,8 @@ function App() {
   const [isTurretCreated, setIsTurretCreated] = useState(false); // Turret 이미지가 생성되었는지 여부
   const [phaserInitialized, setPhaserInitialized] = useState(false); // Phaser가 초기화되었는지 여부
   const [isPopupVisible, setIsPopupVisible] = useState(false); // 팝업창 표시 여부
+  const [posts, setPosts] = useState([]); // 게시글 데이터를 저장할 상태
+  const [loading, setLoading] = useState(true); // 로딩 상태 관리
 
 
   // 각각의 요소에 클릭 이벤트를 추가
@@ -102,6 +103,22 @@ function App() {
     };
   }, [isCanvasVisible, canvasRef, turretRef]);
 
+  // React 컴포넌트에서 서버로 데이터 요청
+  useEffect(() => {
+    if (isPopupVisible) {
+      fetch('http://localhost:5000/api/posts') // Node.js 서버로부터 데이터 요청
+        .then((response) => response.json())
+        .then((data) => {
+          setPosts(data); // 받은 데이터를 상태에 저장
+          setLoading(false); // 로딩 완료
+        })
+        .catch((error) => {
+          console.error('Error fetching posts:', error);
+          setLoading(false);
+        });
+    }
+  }, [isPopupVisible]); // 팝업이 열릴 때만 데이터를 요청
+
   // 팝업창을 여는 함수
   const showPopup = () => {
     setIsPopupVisible(true); // 팝업창을 보이도록 상태 업데이트
@@ -147,7 +164,18 @@ function App() {
         <div className="popup-overlay">
           <div className="popup">
             <h2>게시판</h2>
-            <p>게시글 불러옴</p>
+            {loading ? (
+              <p>로딩 중...</p> // 로딩 중일 때 표시
+            ) : (
+              <ul>
+                {posts.map((post) => (
+                  <li key={post.id}>
+                    <h3>{post.title}</h3>
+                    <p>{post.content}</p>
+                  </li>
+                ))}
+              </ul>
+            )}
             <button onClick={closePopup}>닫기</button>
           </div>
         </div>
