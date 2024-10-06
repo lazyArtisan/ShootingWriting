@@ -163,6 +163,11 @@ function App() {
       {isPopupVisible && (
         <div className="popup-overlay">
           <div className="popup">
+            {/* 우측 상단 닫기 버튼 */}
+            <button className="close-button-top-right" onClick={closePopup}>
+              &times;
+            </button>
+
             <h2>게시판</h2>
             {loading ? (
               <p>로딩 중...</p> // 로딩 중일 때 표시
@@ -181,7 +186,7 @@ function App() {
                 ))}
               </div>
             )}
-            <button onClick={closePopup}>닫기</button>
+            <button onClick={closePopup}>닫기</button> {/* 하단 닫기 버튼 */}
           </div>
         </div>
       )}

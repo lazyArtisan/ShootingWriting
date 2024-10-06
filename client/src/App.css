@@ -74,14 +74,32 @@ button {
 }
 
 .popup {
+  position: relative; /* 우측 상단 닫기 버튼을 위치시키기 위해 relative 설정 */
   background: white;
   padding: 20px;
   width: 80%;
   max-width: 600px;
-  max-height: 80vh; /* 높이 제한 추가 */
+  max-height: 80vh;
   border-radius: 10px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  overflow-y: auto; /* 내부 콘텐츠가 넘칠 경우 스크롤 */
+  overflow-y: auto;
+}
+
+/* 우측 상단 닫기 버튼 스타일 */
+.close-button-top-right {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #333;
+}
+
+.close-button-top-right:hover {
+  color: #1da1f2; /* 트위터 블루 색상 */
 }
 
 /* 게시글 목록 스타일 */
@@ -126,7 +144,7 @@ button {
   color: #14171a; /* 트위터의 글자 색상 */
 }
 
-/* 닫기 버튼 스타일 */
+/* 하단 닫기 버튼 스타일 */
 button {
   background-color: #1da1f2;
   color: white;
