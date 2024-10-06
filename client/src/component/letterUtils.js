@@ -2,7 +2,7 @@ import { gsap } from "gsap";
 
 // 랜덤 알파벳 생성 함수
 export const getRandomLetter = () => {
-  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   return letters[Math.floor(Math.random() * letters.length)];
 };
 
