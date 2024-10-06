@@ -26,8 +26,11 @@ function App() {
   const [posts, setPosts] = useState([]); // 게시글 데이터를 저장할 상태
   const [loading, setLoading] = useState(true); // 로딩 상태 관리
   const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 여부 상태
-  const [nickname, setNickname] = useState(''); // 닉네임 관리
 
+  // 컴포넌트가 처음 렌더링될 때 세션 스토리지 초기화
+  useEffect(() => {
+    sessionStorage.clear(); // 세션 스토리지 초기화
+  }, []); // 빈 배열을 넣어 컴포넌트가 처음 마운트될 때만 실행
 
   // 각각의 요소에 클릭 이벤트를 추가
   const handleUsernameClick = () => {
@@ -134,7 +137,7 @@ function App() {
   // 로그인 버튼을 눌렀을 때 로그인 상태로 전환
   const handleLogin = () => {
     const nicknameValue = nicknameRef.current.value; // input 필드의 값을 가져옴
-    setNickname(nicknameValue); // 닉네임 상태 업데이트
+    sessionStorage.setItem('nickname', nicknameValue); // 세션 스토리지에 닉네임 저장
     setIsLoggedIn(true); // 로그인 상태로 전환
     console.log('닉네임:', nicknameValue);
   };
@@ -183,7 +186,7 @@ function App() {
             {!isLoggedIn ? (
               <div className="login-form">
                 <h2>닉네임 입력</h2>
-                <input type="text" placeholder="아이디" className="login-input" ref={nicknameRef} />
+                <input type="text" id="nickname" placeholder="닉네임" className="login-input" ref={nicknameRef} />
                 &nbsp;&nbsp;&nbsp;
                 <button className="login-button" onClick={handleLogin}>
                   확인
@@ -200,8 +203,7 @@ function App() {
                       <div key={post.id} className="post-card">
                         <div className="post-header">
                           <div className="post-user-info">
-                            <h3 className="post-title">{post.title}</h3>
-                            <p className="post-username">@username</p> {/* 사용자명 */}
+                            <p className="post-username">{post.nickname}</p> {/* 사용자명 */}
                           </div>
                         </div>
                         <p className="post-content">{post.content}</p>

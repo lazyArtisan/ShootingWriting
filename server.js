@@ -13,7 +13,7 @@ mongoose.connect(mongoURI)
 
 // 게시글 스키마 및 모델 정의
 const postSchema = new mongoose.Schema({
-  title: String,
+  nickname: String,
   content: String,
 });
 
@@ -45,9 +45,10 @@ app.get('/api/posts', async (req, res) => {
 
 // 게시글 추가 (POST)
 app.post('/api/posts', async (req, res) => {
-  const { title, content } = req.body;
+  console.log(req.body); // 요청 바디 확인
+  const { nickname, content } = req.body;
   try {
-    const newPost = new Post({ title, content });
+    const newPost = new Post({ nickname, content });
     await newPost.save(); // MongoDB에 새 게시글 저장
     res.status(201).json(newPost);
   } catch (err) {

@@ -10,12 +10,12 @@ export const deleteButtonPressed = (deleteButton, inputField) => {
 
 // HTML 입력 창 데이터를 POST 요청으로 서버에 전송
 export const submitButtonPressed = (submitButton) => {
+    const nickname = sessionStorage.getItem('nickname') || 'Jungler';
+    console.log("nickname:", nickname);
+
     // 입력 필드의 데이터를 가져옴
     const inputField = document.getElementById('player-input');
     const content = inputField ? inputField.value.trim() : ''; // 공백 제거 후 값 확인
-
-    // 제목을 공란으로 설정
-    const title = '';
 
     // 데이터가 비어 있으면 요청을 보내지 않음
     if (!content) {
@@ -29,7 +29,7 @@ export const submitButtonPressed = (submitButton) => {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ title, content }), // 서버에 보낼 데이터를 JSON으로 변환
+        body: JSON.stringify({ nickname, content }), // 서버에 보낼 데이터를 JSON으로 변환
     })
     .then(response => response.json())
     .then(data => {
@@ -40,7 +40,7 @@ export const submitButtonPressed = (submitButton) => {
         console.error('Error:', error); // 오류 발생 시 콘솔 출력
     });
 
-    console.log("Submit button pressed, data sent:", { title, content });
+    console.log("Submit button pressed, data sent:", { nickname, content });
 };
 
 
