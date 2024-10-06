@@ -1,4 +1,4 @@
-
+import { createLetter } from './letterUtils';
 
 export const threadButtonPressed = (doorGroup) => {
     console.log("threadButton");
@@ -44,6 +44,13 @@ export const submitButtonPressed = (submitButton) => {
 };
 
 
-export const switchButtonPressed = (switchButton) => {
+export const switchButtonPressed = (switchButton, intervalId) => {
     console.log("switchButton");
+
+    if (intervalId) {
+        clearInterval(intervalId); // 인터벌 제거
+    } else {
+        const newIntervalId = setInterval(createLetter, 100); // 0.1초마다 새로운 글자를 생성
+        return newIntervalId; // 인터벌 ID 반환
+    }
 }

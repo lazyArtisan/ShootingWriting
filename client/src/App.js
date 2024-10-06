@@ -2,7 +2,6 @@ import React, { useRef, useState, useEffect } from "react";
 import { gsap } from "gsap";
 import { initializePhaserGame } from "./component/PhaserGame"; // Phaser 초기화 함수 불러오기
 import { createPieces } from "./component/animationUtils"; // 애니메이션 함수 불러오기
-import { createLetter } from "./component/letterUtils"; // 랜덤 알파벳 함수 불러오기
 import { createTurret } from "./component/createTurret"; // 모듈화된 Turret 생성 함수 불러오기
 import { fireBullet } from "./component/bulletUtils";
 import "./App.css"; // CSS 파일 불러오기
@@ -72,11 +71,6 @@ function App() {
       }, 2000); // 2초 지연 후 실행
     }
   };
-
-  useEffect(() => {
-    if (isCanvasVisible)
-      setInterval(createLetter, 100); // 0.1초마다 새로운 글자를 생성
-  }, [isCanvasVisible]); // 캔버스가 표시될 때만 실행
 
   // 클릭 상태가 변경될 때마다 확인
   useEffect(() => {

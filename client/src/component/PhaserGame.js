@@ -13,6 +13,7 @@ export const initializePhaserGame = (parentId, onShowPopup) => {
   let submitButton;
   let switchButton;
   let doorGroup;
+  let intervalId;
   let playerTouchingDoor = false;
   let playerTouchingDeleteButton = false;
   let playerTouchingSubmitButton = false;
@@ -152,7 +153,7 @@ export const initializePhaserGame = (parentId, onShowPopup) => {
         submitButtonPressed(submitButton);
       }
       if (playerTouchingSwitchButton) {
-        switchButtonPressed(switchButton);
+        intervalId = switchButtonPressed(switchButton, intervalId); // 인터벌 ID 저장
       }
     }
 
