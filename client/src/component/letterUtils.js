@@ -23,7 +23,7 @@ export const createLetter = () => {
   // GSAP 애니메이션: 글자를 왼쪽으로 이동
   gsap.to(letter, {
     x: -window.innerWidth - 100, // 화면 왼쪽 바깥으로 이동
-    duration: Math.random() * 5 + 3, // 랜덤 속도
+    duration: Math.random() * 5 + 6, // 랜덤 속도
     ease: "linear",
     onComplete: () => {
       letter.remove(); // 화면을 벗어나면 제거
