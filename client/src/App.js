@@ -24,6 +24,7 @@ function App() {
   const [isPopupVisible, setIsPopupVisible] = useState(false); // 팝업창 표시 여부
   const [posts, setPosts] = useState([]); // 게시글 데이터를 저장할 상태
   const [loading, setLoading] = useState(true); // 로딩 상태 관리
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 여부 상태
 
 
   // 각각의 요소에 클릭 이벤트를 추가
@@ -85,7 +86,6 @@ function App() {
 
   // 클릭 시마다 총알 발사
   const handleFireBullet = () => {
-    // console.log("pretend fired");
     fireBullet(turretRef);
   };
 
@@ -105,7 +105,7 @@ function App() {
 
   // React 컴포넌트에서 서버로 데이터 요청
   useEffect(() => {
-    if (isPopupVisible) {
+    if (isPopupVisible && isLoggedIn) {
       fetch('http://localhost:5000/api/posts') // Node.js 서버로부터 데이터 요청
         .then((response) => response.json())
         .then((data) => {
@@ -117,7 +117,7 @@ function App() {
           setLoading(false);
         });
     }
-  }, [isPopupVisible]); // 팝업이 열릴 때만 데이터를 요청
+  }, [isPopupVisible, isLoggedIn]); // 팝업이 열릴 때만 데이터를 요청
 
   // 팝업창을 여는 함수
   const showPopup = () => {
@@ -127,6 +127,11 @@ function App() {
   // 팝업창을 닫는 함수
   const closePopup = () => {
     setIsPopupVisible(false); // 팝업창을 숨김
+  };
+
+  const handleLogin = () => {
+    // 로그인 버튼을 눌렀을 때 로그인 상태로 전환
+    setIsLoggedIn(true);
   };
 
   return (
@@ -168,25 +173,39 @@ function App() {
               &times;
             </button>
 
-            <h2>게시판</h2>
-            {loading ? (
-              <p>로딩 중...</p> // 로딩 중일 때 표시
-            ) : (
-              <div className="post-list">
-                {posts.map((post) => (
-                  <div key={post.id} className="post-card">
-                    <div className="post-header">
-                      <div className="post-user-info">
-                        <h3 className="post-title">{post.title}</h3>
-                        <p className="post-username">@username</p> {/* 사용자명 */}
-                      </div>
-                    </div>
-                    <p className="post-content">{post.content}</p>
-                  </div>
-                ))}
+            {/* 로그인 여부에 따라 다른 콘텐츠 렌더링 */}
+            {!isLoggedIn ? (
+              <div className="login-form">
+                <h2>닉네임 입력</h2>
+                <input type="text" placeholder="아이디" className="login-input" />
+                &nbsp;&nbsp;&nbsp;
+                <button className="login-button" onClick={handleLogin}>
+                  확인
+                </button>
               </div>
+            ) : (
+              <>
+                <h2>게시판</h2>
+                {loading ? (
+                  <p>로딩 중...</p> // 로딩 중일 때 표시
+                ) : (
+                  <div className="post-list">
+                    {posts.map((post) => (
+                      <div key={post.id} className="post-card">
+                        <div className="post-header">
+                          <div className="post-user-info">
+                            <h3 className="post-title">{post.title}</h3>
+                            <p className="post-username">@username</p> {/* 사용자명 */}
+                          </div>
+                        </div>
+                        <p className="post-content">{post.content}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                <button onClick={closePopup}>닫기</button> {/* 하단 닫기 버튼 */}
+              </>
             )}
-            <button onClick={closePopup}>닫기</button> {/* 하단 닫기 버튼 */}
           </div>
         </div>
       )}
