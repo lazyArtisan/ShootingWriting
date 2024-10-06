@@ -59,33 +59,85 @@ button {
   height: auto; /* 비율 유지 */
 }
 
-/* 배경 어둡게 처리 */
+/* 팝업 스타일 */
 .popup-overlay {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
 }
 
-/* 팝업창 스타일 */
 .popup {
-  width: 500px;
-  height: 800px;
-  background-color: white;
+  background: white;
   padding: 20px;
+  width: 80%;
+  max-width: 600px;
+  max-height: 80vh; /* 높이 제한 추가 */
   border-radius: 10px;
-  text-align: center;
-  overflow-y: auto; /* 세로 스크롤 추가 */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  overflow-y: auto; /* 내부 콘텐츠가 넘칠 경우 스크롤 */
 }
 
-.popup button {
-  padding: 10px 20px;
+/* 게시글 목록 스타일 */
+.post-list {
   margin-top: 20px;
+}
+
+.post-card {
+  background: #f5f8fa; /* 트위터의 카드 배경색 */
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 */
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.post-user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: #1da1f2; /* 트위터 블루 색상 */
+}
+
+.post-username {
+  margin: 0;
+  font-size: 14px;
+  color: #657786; /* 트위터에서 자주 사용하는 회색 */
+}
+
+.post-content {
+  font-size: 15px;
+  color: #14171a; /* 트위터의 글자 색상 */
+}
+
+/* 닫기 버튼 스타일 */
+button {
+  background-color: #1da1f2;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 5px;
   cursor: pointer;
+  margin-top: 20px;
+}
+
+button:hover {
+  background-color: #1991da;
 }

@@ -167,14 +167,19 @@ function App() {
             {loading ? (
               <p>로딩 중...</p> // 로딩 중일 때 표시
             ) : (
-              <ul>
+              <div className="post-list">
                 {posts.map((post) => (
-                  <li key={post.id}>
-                    <h3>{post.title}</h3>
-                    <p>{post.content}</p>
-                  </li>
+                  <div key={post.id} className="post-card">
+                    <div className="post-header">
+                      <div className="post-user-info">
+                        <h3 className="post-title">{post.title}</h3>
+                        <p className="post-username">@username</p> {/* 사용자명 */}
+                      </div>
+                    </div>
+                    <p className="post-content">{post.content}</p>
+                  </div>
                 ))}
-              </ul>
+              </div>
             )}
             <button onClick={closePopup}>닫기</button>
           </div>
