@@ -144,7 +144,7 @@ export const initializePhaserGame = (parentId, onShowPopup) => {
       }
       if (playerTouchingDeleteButton) {
         const textarea = inputField.node.querySelector('textarea');
-        textarea.value = ''; // 값 초기화
+        textarea.value = textarea.value.slice(0, -1); // 마지막 글자만 제거
         // deleteButtonPressed(deleteButton, inputField);
         console.log("deleteButton");
       }
