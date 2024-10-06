@@ -75,6 +75,8 @@ button {
 
 /* 팝업창 스타일 */
 .popup {
+  width: 500px;
+  height: 800px;
   background-color: white;
   padding: 20px;
   border-radius: 10px;

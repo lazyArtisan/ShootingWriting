@@ -146,8 +146,8 @@ function App() {
       {isPopupVisible && (
         <div className="popup-overlay">
           <div className="popup">
-            <h2>팝업창</h2>
-            <p>이 팝업은 특정 이벤트에 의해 표시됩니다.</p>
+            <h2>게시판</h2>
+            <p>게시글 불러옴</p>
             <button onClick={closePopup}>닫기</button>
           </div>
         </div>
