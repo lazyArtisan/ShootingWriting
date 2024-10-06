@@ -1,13 +1,17 @@
 ## [WEEK13] 실력 다지기 : 게시판 과제
 
+영상 : https://www.youtube.com/watch?v=Fej_Fc2lXto
+
 하얀 사각형 안은 Phaser,<br>
 그 바깥은 전부 React로 구현. <br>
 서버는 Node.js + MongoDB 사용. <br>
 
 총알을 쏴서 맞추어 글을 입력하는 게임형 게시판.
 
+ <br>
+
 ## 기술적 챌린지
-### 1. 정보 주고받기
+### 정보 주고받기
 리액트만 쓴게 아니라 페이저도 같이 쓰다보니<br>
 리액트의 메인 파일인 App.js와 페이저의 메인 파일인 PhaserGame.js가 상호작용할 때 머리가 아팠다.
 
@@ -26,9 +30,9 @@
 페이저, 리액트 어디에서나 쉽게 접근할 수 있게 하였다.<br>
 써도 되는거 맞나 싶을 정도로 편했다.
 
+ <br>
 
-
-
+## 스크린샷
 
 ![스크린샷 2024-10-06 21-07-01](https://github.com/user-attachments/assets/f0614248-8df3-4bac-a996-9d73ac6c1aeb)
 ![스크린샷 2024-10-06 21-08-20](https://github.com/user-attachments/assets/125b47bf-d38d-414b-af90-05d6d6ae7cbe)
