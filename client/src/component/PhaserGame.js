@@ -2,7 +2,7 @@ import Phaser from "phaser";
 import { threadButtonPressed, deleteButtonPressed, submitButtonPressed, switchButtonPressed } from "./buttonUtils";
 
 // Phaser 게임 초기화 함수
-export const initializePhaserGame = (parentId) => {
+export const initializePhaserGame = (parentId, onShowPopup) => {
   let player;
   let cursors;
   let zKey;
@@ -140,6 +140,7 @@ export const initializePhaserGame = (parentId) => {
     if (Phaser.Input.Keyboard.JustDown(cKey)) {
       if (playerTouchingDoor) {
         threadButtonPressed(doorGroup);
+        onShowPopup();
       }
       if (playerTouchingDeleteButton) {
         const textarea = inputField.node.querySelector('textarea');

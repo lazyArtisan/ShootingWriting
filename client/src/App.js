@@ -22,6 +22,8 @@ function App() {
   const [isCanvasVisible, setIsCanvasVisible] = useState(false); // 캔버스가 표시되는 상태
   const [isTurretCreated, setIsTurretCreated] = useState(false); // Turret 이미지가 생성되었는지 여부
   const [phaserInitialized, setPhaserInitialized] = useState(false); // Phaser가 초기화되었는지 여부
+  const [isPopupVisible, setIsPopupVisible] = useState(false); // 팝업창 표시 여부
+
 
   // 각각의 요소에 클릭 이벤트를 추가
   const handleUsernameClick = () => {
@@ -74,7 +76,7 @@ function App() {
   useEffect(() => {
     if (isCanvasVisible && canvasRef.current && !phaserInitialized) {
       console.log("Canvas now visible:", canvasRef.current);
-      initializePhaserGame("phaser-container");
+      initializePhaserGame("phaser-container", showPopup);
       createTurret(canvasRef, turretRef, isTurretCreated, setIsTurretCreated);
       setPhaserInitialized(true); // Phaser가 한 번만 초기화되도록 설정
     }
@@ -100,34 +102,58 @@ function App() {
     };
   }, [isCanvasVisible, canvasRef, turretRef]);
 
+  // 팝업창을 여는 함수
+  const showPopup = () => {
+    setIsPopupVisible(true); // 팝업창을 보이도록 상태 업데이트
+  };
+
+  // 팝업창을 닫는 함수
+  const closePopup = () => {
+    setIsPopupVisible(false); // 팝업창을 숨김
+  };
+
   return (
-    <div ref={containerRef} className="login-container">
-      {!isCanvasVisible ? (
-        <>
-          <input
-            ref={usernameRef}
-            type="text"
-            placeholder="Username"
-            onClick={handleUsernameClick}
-          />
-          <input
-            ref={passwordRef}
-            type="password"
-            placeholder="Password"
-            onClick={handlePasswordClick}
-          />
-          <button ref={loginButtonRef} onClick={handleLoginClick}>
-            Login
-          </button>
-        </>
-      ) : (
-        <div
-          ref={canvasRef}
-          id="phaser-container"
-          className="phaser-container"
-        ></div>
+    <div>
+      <div ref={containerRef} className="login-container">
+        {!isCanvasVisible ? (
+          <>
+            <input
+              ref={usernameRef}
+              type="text"
+              placeholder="Username"
+              onClick={handleUsernameClick}
+            />
+            <input
+              ref={passwordRef}
+              type="password"
+              placeholder="Password"
+              onClick={handlePasswordClick}
+            />
+            <button ref={loginButtonRef} onClick={handleLoginClick}>
+              Login
+            </button>
+          </>
+        ) : (
+          <div
+            ref={canvasRef}
+            id="phaser-container"
+            className="phaser-container"
+          ></div>
+        )}
+      </div>
+
+      {/* 팝업창이 보이는 경우에만 렌더링 */}
+      {isPopupVisible && (
+        <div className="popup-overlay">
+          <div className="popup">
+            <h2>팝업창</h2>
+            <p>이 팝업은 특정 이벤트에 의해 표시됩니다.</p>
+            <button onClick={closePopup}>닫기</button>
+          </div>
+        </div>
       )}
     </div>
+    
   );
 }
 
