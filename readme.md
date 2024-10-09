@@ -2,7 +2,7 @@
 
 영상 : https://www.youtube.com/watch?v=Fej_Fc2lXto
 
-제작 기간 : 24.10.05~24.10.06 (2일)
+제작 기간 : 24.10.05 ~ 24.10.06 (2일)
 
 하얀 사각형 안은 Phaser,<br>
 그 바깥은 전부 React로 구현. <br>
