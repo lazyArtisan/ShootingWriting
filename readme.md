@@ -1,4 +1,4 @@
-## [WEEK13] 실력 다지기 : 게시판 과제
+## Krafton Jungle :: [WEEK13] 실력 다지기 : 게시판 과제
 
 영상 : https://www.youtube.com/watch?v=Fej_Fc2lXto
 
@@ -39,4 +39,16 @@
 ![스크린샷 2024-10-06 21-08-33](https://github.com/user-attachments/assets/30e1646e-a7bc-40f1-aa04-2697446a4037)
 ![스크린샷 2024-10-06 21-08-45](https://github.com/user-attachments/assets/0407f8a3-9b5b-4ca1-b9f0-f38140d6c527)
 ![스크린샷 2024-10-06 21-17-55](https://github.com/user-attachments/assets/359a4173-cb57-4e19-ba04-b3257c55e787)
+
+<br>
+
+## 발표 ppt
+
+![image](https://github.com/user-attachments/assets/8ff1b74a-d699-4901-b40c-783d6634b2fa)
+![image](https://github.com/user-attachments/assets/13c71133-1a24-4265-83ad-1bb6140d06a1)
+![image](https://github.com/user-attachments/assets/b3b66bb6-3335-456a-9f1c-b30eb5cb8d45)
+![image](https://github.com/user-attachments/assets/e6581c69-0038-4ba0-8f60-03d82879b6c9)
+![image](https://github.com/user-attachments/assets/4d03670a-dc25-4380-9815-b42d170e3711)
+![image](https://github.com/user-attachments/assets/4ef26921-ba32-4e79-8afc-a15d98da48cf)
+![image](https://github.com/user-attachments/assets/0b51bc60-422b-4b26-9ba2-95d88e47d859)
 
