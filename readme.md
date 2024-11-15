@@ -1,6 +1,7 @@
 ## Krafton Jungle :: [WEEK13] 실력 다지기 : 게시판 과제
 
-영상 : https://www.youtube.com/watch?v=Fej_Fc2lXto
+[![dddd](https://github.com/user-attachments/assets/63f8d8a8-01a6-4b0b-b59d-c2116b227cd0)](https://www.youtube.com/watch?v=Fej_Fc2lXto)
+
 
 제작 기간 : 24.10.05 ~ 24.10.06 (2일)
 
