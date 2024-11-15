@@ -12,6 +12,28 @@
 
  <br>
 
+## 스크린샷
+
+![스크린샷 2024-10-06 21-07-01](https://github.com/user-attachments/assets/f0614248-8df3-4bac-a996-9d73ac6c1aeb)
+![스크린샷 2024-10-06 21-08-20](https://github.com/user-attachments/assets/125b47bf-d38d-414b-af90-05d6d6ae7cbe)
+![스크린샷 2024-10-06 21-08-33](https://github.com/user-attachments/assets/30e1646e-a7bc-40f1-aa04-2697446a4037)
+![스크린샷 2024-10-06 21-08-45](https://github.com/user-attachments/assets/0407f8a3-9b5b-4ca1-b9f0-f38140d6c527)
+![스크린샷 2024-10-06 21-17-55](https://github.com/user-attachments/assets/359a4173-cb57-4e19-ba04-b3257c55e787)
+
+<br>
+
+## 발표 ppt
+
+![image](https://github.com/user-attachments/assets/8ff1b74a-d699-4901-b40c-783d6634b2fa)
+![image](https://github.com/user-attachments/assets/13c71133-1a24-4265-83ad-1bb6140d06a1)
+![image](https://github.com/user-attachments/assets/b3b66bb6-3335-456a-9f1c-b30eb5cb8d45)
+![image](https://github.com/user-attachments/assets/e6581c69-0038-4ba0-8f60-03d82879b6c9)
+![image](https://github.com/user-attachments/assets/4d03670a-dc25-4380-9815-b42d170e3711)
+![image](https://github.com/user-attachments/assets/4ef26921-ba32-4e79-8afc-a15d98da48cf)
+![image](https://github.com/user-attachments/assets/0b51bc60-422b-4b26-9ba2-95d88e47d859)
+
+ <br>
+
 ## 기술적 챌린지
 ### 파일 간 정보 주고받기
 리액트만 쓴게 아니라 페이저도 같이 쓰다보니<br>
@@ -32,25 +54,4 @@
 페이저, 리액트 어디에서나 쉽게 접근할 수 있게 하였다.<br>
 써도 되는거 맞나 싶을 정도로 편했다.
 
- <br>
-
-## 스크린샷
-
-![스크린샷 2024-10-06 21-07-01](https://github.com/user-attachments/assets/f0614248-8df3-4bac-a996-9d73ac6c1aeb)
-![스크린샷 2024-10-06 21-08-20](https://github.com/user-attachments/assets/125b47bf-d38d-414b-af90-05d6d6ae7cbe)
-![스크린샷 2024-10-06 21-08-33](https://github.com/user-attachments/assets/30e1646e-a7bc-40f1-aa04-2697446a4037)
-![스크린샷 2024-10-06 21-08-45](https://github.com/user-attachments/assets/0407f8a3-9b5b-4ca1-b9f0-f38140d6c527)
-![스크린샷 2024-10-06 21-17-55](https://github.com/user-attachments/assets/359a4173-cb57-4e19-ba04-b3257c55e787)
-
-<br>
-
-## 발표 ppt
-
-![image](https://github.com/user-attachments/assets/8ff1b74a-d699-4901-b40c-783d6634b2fa)
-![image](https://github.com/user-attachments/assets/13c71133-1a24-4265-83ad-1bb6140d06a1)
-![image](https://github.com/user-attachments/assets/b3b66bb6-3335-456a-9f1c-b30eb5cb8d45)
-![image](https://github.com/user-attachments/assets/e6581c69-0038-4ba0-8f60-03d82879b6c9)
-![image](https://github.com/user-attachments/assets/4d03670a-dc25-4380-9815-b42d170e3711)
-![image](https://github.com/user-attachments/assets/4ef26921-ba32-4e79-8afc-a15d98da48cf)
-![image](https://github.com/user-attachments/assets/0b51bc60-422b-4b26-9ba2-95d88e47d859)
 
