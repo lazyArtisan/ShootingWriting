@@ -6,7 +6,7 @@
 제작 기간 : 24.10.05 ~ 24.10.06 (2일)
 
 하얀 사각형 안은 Phaser,<br>
-그 바깥은 전부 React로 구현. <br>
+그 바깥은 전부 React와 Javascript로 구현. <br>
 서버는 Node.js + MongoDB 사용. <br>
 
 총알을 쏴서 맞추어 글을 입력하는 게임형 게시판.
